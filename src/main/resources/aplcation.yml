@@ -1,0 +1,6 @@
+resilience4j:
+  retry:
+    instances:
+      emailResponseRetry:
+        maxRetryAttempts: 3
+        waitDuration: 500ms
