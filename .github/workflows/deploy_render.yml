@@ -1,0 +1,35 @@
+name: deploy_on_render 
+
+on:
+  push:
+    branches: [ "Main" ]
+
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout the code
+      uses: actions/checkout@v4
+
+    - name: set up java
+      uses: actions/setup-java@v5
+      with:
+        distribution: 'temurin'
+        java-version: '25'
+        check-latest: true
+
+    - name: build jar
+      run: ./mvnw
+    
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: push to docker hub
+      uses: actions/checkout@v4
+
+    - name: deploy on render
+      uses: actions/checkout@v4
