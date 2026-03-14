@@ -8,10 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,6 +23,12 @@ public class EmailResponseController {
     private final RateLimiterRegistry rateLimiterRegistry;
     private final Map<String, RateLimiter> ipLimiters = new ConcurrentHashMap<>();
 
+
+    @GetMapping("/hi")
+    ResponseEntity<String> hiHello(){
+
+        return ResponseEntity.ok("Hello User !");
+    }
 
     @PostMapping("/response")
     ResponseEntity<String> responseEmail(@RequestBody EmailRequestDto emailRequestDto, HttpServletRequest servletRequest){
