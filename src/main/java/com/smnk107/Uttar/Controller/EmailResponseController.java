@@ -27,7 +27,7 @@ public class EmailResponseController {
     @GetMapping("/hi")
     ResponseEntity<String> hiHello(){
 
-        return ResponseEntity.ok("Hello, Dear User !");
+        return ResponseEntity.ok("Ki re dada, ki korchu ?");
     }
 
     @PostMapping("/response")
