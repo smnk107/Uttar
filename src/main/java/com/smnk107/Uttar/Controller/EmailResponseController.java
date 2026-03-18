@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -27,13 +28,15 @@ public class EmailResponseController {
     @GetMapping("/hi")
     ResponseEntity<String> hiHello(){
 
-        return ResponseEntity.ok("Ki re dada, ki korchu ?");
+        return ResponseEntity.ok("Hello User !");
     }
 
     @PostMapping("/response")
-    ResponseEntity<String> responseEmail(@RequestBody EmailRequestDto emailRequestDto, HttpServletRequest servletRequest){
+    ResponseEntity<String> responseEmail(@RequestBody EmailRequestDto emailRequestDto, HttpServletRequest servletRequest)  {
 
         String clientIp = servletRequest.getRemoteAddr();
+        System.out.println("User Email:"+emailRequestDto.getUserEmail());
+        emailRequestDto.setIpAddress(clientIp);
 
         RateLimiter limiter = ipLimiters.computeIfAbsent(clientIp,
                 ip -> rateLimiterRegistry.rateLimiter("emailLimiter-" + ip));

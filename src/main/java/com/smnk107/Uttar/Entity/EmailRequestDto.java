@@ -7,4 +7,6 @@ public class EmailRequestDto {
 
     private String emailContent;
     private String tone;
+    private String userEmail;
+    private String ipAddress;
 }
